@@ -21,4 +21,31 @@ router.post('/register', async(req, res) => {
     res.send(shed);
 })
 
+// get shed list
+router.get(`/get`, async (req, res) => {
+    const shed = await Shed.find();
+
+    if(!shed) {
+        res.status(500).json({success: false});
+    }
+    res.send(shed);
+});
+
+// update shed
+router.put('/put/:id', async(req, res) => {
+    const shed = await Shed.findByIdAndUpdate(
+        req.params.id,
+        {
+            arrivaltime: req.body.arrivaltime,
+            finishtime: req.body.finishtime
+        },
+        {new: true} // if not update, return old data after put request
+    )
+    if(!shed){
+        return res.status(404).send('The shed cannot be updated!');
+    }
+
+    res.send(shed);
+});
+
 module.exports = router;
