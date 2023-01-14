@@ -19,9 +19,11 @@ const api = process.env.API_URL;
 
 // imported routers
 const shedRouter = require('./routers/sheds');
+const vehicleRouter=require('./routers/vehicles');
 
 // set api uril
 app.use(`${api}/sheds`, shedRouter);
+app.use(`${api}/vehicles`,vehicleRouter);
 
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
