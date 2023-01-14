@@ -1,11 +1,11 @@
-const express = require('express')
+const express = require('express');
 const app = express();
-require('dotenv/config');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-mongoose.set('strictQuery', true);
 const cors = require('cors');
 const bodyParser = require('body-parser');
+require('dotenv/config');
+mongoose.set('strictQuery', true);
 
 app.use(cors());
 // http request
@@ -14,6 +14,14 @@ app.options('*', cors());
 // for indentify post request json file format (Middleware)
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+
+const api = process.env.API_URL;
+
+// imported routers
+const shedRouter = require('./routers/sheds');
+
+// set api uril
+app.use(`${api}/sheds`, shedRouter);
 
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
