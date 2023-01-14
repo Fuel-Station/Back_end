@@ -21,17 +21,12 @@ mongoose.connect(process.env.CONNECTION_STRING, {
     dbName: process.env.DB_NAME
 })
 .then(() => {
+    app.listen(process.env.PORT, () => {
+        console.log('Server is listening.....')
+    })
     console.log('Database connection is ready......');
 })
 .catch((err) => {
     console.log(err);
 })
 
-app.get('/', (req, res) => {
-    res.send('<h1>Fuel app create </h1>');
-})
-
-
-app.listen(process.env.PORT, () => {
-    console.log('Server is listening.....')
-})
