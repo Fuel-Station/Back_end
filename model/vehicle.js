@@ -10,5 +10,6 @@ const vehicleSchema=mongoose.Schema({
         required:true
     },
     
+    
 })
 exports.Vehicle=mongoose.model('Vehicle',vehicleSchema)
